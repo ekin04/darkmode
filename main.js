@@ -2,19 +2,19 @@ let theme = localStorage.getItem('data-theme');
 let firstVisit = localStorage.getItem('first-visit');
 const checkbox = document.getElementById("switch");
 
-//cambia il tema in dark
+//change theme to dark
 const changeThemeToDark = () =>{
     document.documentElement.setAttribute("data-theme", "dark")
     localStorage.setItem("data-theme", "dark")
 }
-//cambia il tema in light
+//change theme to light
 const changeThemeToLight = () =>{
     document.documentElement.setAttribute("data-theme", "light")
     localStorage.setItem("data-theme", 'light') 
 }
 
 
-//controllo sullo stato dello slide
+//control on slide event
 checkbox.addEventListener('change', ()=> {
     let theme = localStorage.getItem('data-theme');
     if (theme ==='dark'){
@@ -26,22 +26,22 @@ checkbox.addEventListener('change', ()=> {
 });
 
 window.addEventListener('load',()=> {
-    //Controllo prima visita cerco se il browser ha un tema dark ed è la prima visita
+    //Control of first visit browser preference
     if(firstVisit == null){ 
         if((window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) == true){
-            console.log("è la prima visita il tema è nero");
-            localStorage.setItem('first-visit', false); //setto la variabile di controllo
+            console.log("system theme is black");
+            localStorage.setItem('first-visit', false); //set control on first visit
             checkbox.checked = true;
-            changeThemeToDark(); //cambio il tema
+            changeThemeToDark(); 
             
         }
         else{
-            console.log("è la prima visita il tema è bianco");
+            console.log("system theme is white");
             localStorage.setItem('first-visit', false);
         }
-    } else{ //non è la prima visita
+    } else{ //isn't first visit
         if (theme === 'dark'){ 
-            //nel caso la pagina viene aggiornata
+            //if user reload page
             checkbox.checked = true;
             changeThemeToDark(); 
         } else{ checkbox.checked = false;}
